@@ -7,9 +7,8 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UsersService {
      constructor(@InjectModel(User.name) private userModel: Model<User>) {}
-        async createUser(user:User){
+        async createUser(user: Pick<User, 'email' | 'name' | 'password'>){
             const hashedPassword = await this.hashPassword(user.password);
-
             const data = {
                 name:user.name,
                 email:user.email,
@@ -23,4 +22,7 @@ export class UsersService {
             const saltRounds = 10;
             return bcrypt.hash(password, saltRounds);
           }
+
+
+          
 }

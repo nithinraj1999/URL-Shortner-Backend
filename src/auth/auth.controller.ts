@@ -1,7 +1,7 @@
 import { Controller, Get, Post,Body  } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { AuthService } from './auth.service';
-import { User } from 'src/interfaces/user.interface';
+import { IUser } from 'src/interfaces/user.interface';
 
 @Controller('auth')
 export class AuthController {
@@ -14,7 +14,7 @@ export class AuthController {
   }
 
   @Post('/login')
-  async login(@Body() UserLogin:Partial<User>) {
+  async login(@Body() UserLogin:Partial<IUser>) {
     const newUser = await this.userService.verifyLogin(UserLogin);
     return newUser
   }

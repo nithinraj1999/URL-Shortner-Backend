@@ -9,9 +9,23 @@ import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema } from './users/user.schema';
+import { ConfigModule } from '@nestjs/config';
+import { UrlController } from './url/url.controller';
+import { UrlService } from './url/url.service';
+import { UrlModule } from './url/url.module';
+import { UrlSchema } from './url/url.schema';
 @Module({
-  imports: [UsersModule, AuthModule,MongooseModule.forRoot('mongodb://localhost:27017/url-shortner'), MongooseModule.forFeature([{ name: 'User', schema: UserSchema }])],
-  controllers: [AppController, UsersController, AuthController],
-  providers: [AppService, UsersService, AuthService],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    UsersModule,
+    AuthModule,
+    MongooseModule.forRoot('mongodb://localhost:27017/url-shortner'),
+    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
+    MongooseModule.forFeature([{ name: 'Url', schema: UrlSchema }]),
+
+    UrlModule,
+  ],
+  controllers: [AppController, UsersController, AuthController, UrlController],
+  providers: [AppService, UsersService, AuthService, UrlService],
 })
 export class AppModule {}
