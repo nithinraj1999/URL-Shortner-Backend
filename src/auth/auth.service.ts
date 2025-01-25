@@ -5,7 +5,6 @@ import { Model } from 'mongoose';
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { IUser } from 'src/interfaces/user.interface';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +13,6 @@ export class AuthService {
             const createdUser = await this.usersService.createUser(user);
             return createdUser
     }
-
 
     async verifyLogin(user: Partial<User>){
         const existingUser = await this.userModel.findOne({ email:user.email}).exec();
@@ -45,4 +43,11 @@ private async validatePassword(plainPassword: string, hashedPassword: string): P
     });
 }
 
+async checkUserExist(email:string){
+    const existingUser = await this.userModel.findOne({ email:email})
+    if(existingUser){
+        return true
+    }
+    return false
+}
 }

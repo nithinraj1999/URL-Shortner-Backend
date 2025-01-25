@@ -9,8 +9,13 @@ export class AuthController {
 
   @Post('/signup')
   async signup(@Body() createUserDto: CreateUserDto) {
+    const email = createUserDto.email
+    const IsExist = await this.userService.checkUserExist(email);
+    if(IsExist){
+      return {success:false,msg:"user exists"}
+    }
     const newUser = await this.userService.createUser(createUserDto);
-    return newUser
+    return {success:true,newUser}
   }
 
   @Post('/login')

@@ -6,14 +6,14 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from 'src/users/user.schema';
 import { Url } from 'src/url/url.schema';
+import { Types } from 'mongoose';
+
 @Injectable()
 export class UrlService {
   constructor(@InjectModel(Url.name) private urlModel: Model<Url>) {}
-
   async shortenUrlUsingHash(createUrlDto: CreateUrlDto): Promise<any> {
     const hash = crypto.createHash('sha256').update(createUrlDto.originalUrl).digest('hex');
-    const shortLink = `http://localhost:5173/${hash.substring(0, 8)}`; 
-    console.log(createUrlDto);
+    const shortLink = `${process.env.FRONTEND_URL}/${hash.substring(0, 8)}`; 
     
                 const data = {
                   originalUrl:createUrlDto.originalUrl,
@@ -24,8 +24,13 @@ export class UrlService {
             return newUrl.save();
   }
 
-  async getUrl(shortened: string): Promise<string | null> {
-    const url = await this.urlModel.findOne({ shortUrl: `http://localhost:5173/${shortened}` }).exec();
-    return url ? url.originalUrl : null; // Return original URL or null if not found
+  async getUrl(shortened: string,userId:string): Promise<string | null> {
+    const url = await this.urlModel.findOne({userId:userId, shortUrl: `${process.env.FRONTEND_URL}/${shortened}`}).exec();
+    return url ? url.originalUrl : null; 
+  }
+
+  async getHistory(userId:string):Promise<any>{
+    const history = await this.urlModel.find({userId:userId},{_id:0,originalUrl:1,shortUrl:1}).sort({_id:-1})
+    return history
   }
 }

@@ -19,10 +19,9 @@ import { UrlSchema } from './url/url.schema';
     ConfigModule.forRoot({ isGlobal: true }),
     UsersModule,
     AuthModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/url-shortner'),
+    MongooseModule.forRoot(process.env.MONGODB_URL),
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
     MongooseModule.forFeature([{ name: 'Url', schema: UrlSchema }]),
-
     UrlModule,
   ],
   controllers: [AppController, UsersController, AuthController, UrlController],
