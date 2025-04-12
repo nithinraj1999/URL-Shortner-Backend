@@ -72,6 +72,7 @@ A URL Shortener application built using Node.js, Nest.js, and React. This applic
    Create a `.env` file in the frontend directory:
    ```env
 VITE_BASE_URL= http://localhost:2000  
+   ```
 
 4. Run the frontend:
    ```bash
