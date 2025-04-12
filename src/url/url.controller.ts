@@ -4,6 +4,7 @@ import { CreateUrlDto } from './dto/create-url-dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import { Types } from 'mongoose';
+import { getLinkPreview } from 'link-preview-js';
 
 @UseGuards(AuthGuard)
 @Controller('url')
@@ -39,5 +40,8 @@ export class UrlController {
     const id = userId.userId
     return this.urlService.getHistory(id);
   }
+
+
+
 
 }

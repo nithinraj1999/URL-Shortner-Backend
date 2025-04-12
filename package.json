@@ -32,6 +32,7 @@
     "class-validator": "^0.14.1",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
+    "link-preview-js": "^3.0.13",
     "mongoose": "^8.9.3",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",

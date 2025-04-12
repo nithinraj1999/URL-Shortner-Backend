@@ -21,7 +21,7 @@ A URL Shortener application built using Node.js, Nest.js, and React. This applic
 ## Prerequisites
 
 - [Node.js](https://nodejs.org) (v14 or later)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- [npm](https://www.npmjs.com/) 
 - [MongoDB](https://www.mongodb.com/) for database
 
 ---
@@ -52,10 +52,8 @@ A URL Shortener application built using Node.js, Nest.js, and React. This applic
 4. Run the backend:
    ```bash
    # Development mode
-   npm run start:dev
+   npm start
 
-   # Production mode
-   npm run start:prod
    ```
 
 ### Frontend Setup (React)
@@ -73,12 +71,11 @@ A URL Shortener application built using Node.js, Nest.js, and React. This applic
 3. Configure environment variables:
    Create a `.env` file in the frontend directory:
    ```env
-   REACT_APP_API_URL=http://localhost:3000
-   ```
+VITE_BASE_URL= http://localhost:2000  
 
 4. Run the frontend:
    ```bash
-   npm start
+   npm run dev
    ```
 
 ---
@@ -97,9 +94,7 @@ A URL Shortener application built using Node.js, Nest.js, and React. This applic
 
 - **Development Mode**: `npm run start:dev`
 - **Production Mode**: `npm run start:prod`
-- **Tests**:
-  - Unit Tests: `npm run test`
-  - End-to-End Tests: `npm run test:e2e`
+
 
 ### Frontend
 
@@ -107,27 +102,3 @@ A URL Shortener application built using Node.js, Nest.js, and React. This applic
 - **Build for Production**: `npm run build`
 
 ---
-
-## API Endpoints
-
-### Authentication
-
-- `POST /auth/signup`: User registration
-- `POST /auth/signin`: User login
-
-### URL Shortening
-
-- `POST /urls/shorten`: Shorten a URL
-- `GET /urls/:id`: Redirect to the original URL
-
----
-
-## License
-
-This project is [MIT licensed](./LICENSE).
-
----
-
-## Contact
-
-For further queries, please reach out to the repository maintainer.
